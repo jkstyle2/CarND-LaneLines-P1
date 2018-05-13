@@ -15,7 +15,7 @@ The goals / steps of this project are the following:
 
 [//]: # (Image References)
 
-[gray_image]: ./test_images_output/gray_image.jpg "Grayscale"
+[gray_image]: ./test_images_output/gray_image.jpg
 [image2]: ./test_images_output/gray_image.jpg "Grayscale"
 [image3]: ./test_images_output/gray_image.jpg "Grayscale"
 [image1]: ./test_images_output/gray_image.jpg "Grayscale"
