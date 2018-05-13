@@ -88,13 +88,10 @@ Overall, the challenge video has some specific features such that:
 3) There are some shadows due to some trees
 
 
-One potential shortcoming would be what would happen when ... 
-
-Another shortcoming could be ...
-
-
 ### 3. Suggest possible improvements to your pipeline
 
-A possible improvement would be to ...
+A possible improvement would be to work on HSV Color space, not in the grayscaled image. As gray image is dependent only on the intensity of pixels, if there is no intensity difference, there is no way to find out the edges. I guess there would be a solution on images in HSV color space which includes more valuable color information to be used.
 
-Another potential improvement could be to ...
+Another potential improvement could be to used adaptive areas for region of interest. As the images are too much shaky on a curve road, the fixed position of ROI is not appropriate. I strongly guess There should be such a great mathematical way to adaptively control the size of ROI Mask.
+
+
