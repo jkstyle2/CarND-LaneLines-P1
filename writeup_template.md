@@ -33,7 +33,6 @@ The goals / steps of this project are the following:
 My pipeline consisted of 6 steps. 
 
 First, I took a single image in RGB(8-bit * 3) format and then converted it to grayscale(8-bit), which is handier to deal with. The color difference is not a thing we care about, but the intensity values are the key point to solve the problem. In this case, I applied Grayscale transform function, cv2.cvtColot(), provided from openCV.
-![//]
 ![gray_image]
 
 
