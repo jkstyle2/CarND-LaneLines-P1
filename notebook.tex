@@ -1,0 +1,1342 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{P1}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{self-driving-car-engineer-nanodegree}{%
+\section{Self-Driving Car Engineer
+Nanodegree}\label{self-driving-car-engineer-nanodegree}}
+
+\hypertarget{project-finding-lane-lines-on-the-road}{%
+\subsection{\texorpdfstring{Project: \textbf{Finding Lane Lines on the
+Road}}{Project: Finding Lane Lines on the Road}}\label{project-finding-lane-lines-on-the-road}}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+In this project, you will use the tools you learned about in the lesson
+to identify lane lines on the road. You can develop your pipeline on a
+series of individual images, and later apply the result to a video
+stream (really just a series of images). Check out the video clip
+``raw-lines-example.mp4'' (also contained in this repository) to see
+what the output should look like after using the helper functions below.
+
+Once you have a result that looks roughly like
+``raw-lines-example.mp4'', you'll need to get creative and try to
+average and/or extrapolate the line segments you've detected to map out
+the full extent of the lane lines. You can see an example of the result
+you're going for in the video ``P1\_example.mp4''. Ultimately, you would
+like to draw just one line for the left side of the lane, and one for
+the right.
+
+In addition to implementing code, there is a brief writeup to complete.
+The writeup should be completed in a separate file, which can be either
+a markdown file or a pdf document. There is a
+\href{https://github.com/udacity/CarND-LaneLines-P1/blob/master/writeup_template.md}{write
+up template} that can be used to guide the writing process. Completing
+both the code in the Ipython notebook and the writeup template will
+cover all of the
+\href{https://review.udacity.com/\#!/rubrics/322/view}{rubric points}
+for this project.
+
+    \textbf{The tools you have are color selection, region of interest
+selection, grayscaling, Gaussian smoothing, Canny Edge Detection and
+Hough Tranform line detection. You are also free to explore and try
+other techniques that were not presented in the lesson. Your goal is
+piece together a pipeline to detect the line segments in the image, then
+average/extrapolate them and draw them onto the image for display (as
+below). Once you have a working pipeline, try it out on the video stream
+below.}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+Your output should look something like this (above) after detecting line
+segments using the helper functions below
+
+Your goal is to connect/average/extrapolate line segments to get output
+like this
+
+    \textbf{Run the cell below to import some packages. If you get an
+\texttt{import\ error} for a package you've already installed, try
+changing your kernel (select the Kernel menu above --\textgreater{}
+Change Kernel). Still have problems? Try relaunching Jupyter Notebook
+from the terminal prompt. Also, consult the forums for more
+troubleshooting tips.}
+
+    \hypertarget{import-packages}{%
+\subsection{Import Packages}\label{import-packages}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{}importing some useful packages}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{image} \PY{k}{as} \PY{n+nn}{mpimg}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{cv2}
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+\end{Verbatim}
+
+
+    \hypertarget{read-in-an-image}{%
+\subsection{Read in an Image}\label{read-in-an-image}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{}reading in an image}
+        \PY{c+c1}{\PYZsh{} image = mpimg.imread(\PYZsq{}test\PYZus{}images/solidWhiteRight.jpg\PYZsq{})}
+        \PY{n}{image} \PY{o}{=} \PY{n}{mpimg}\PY{o}{.}\PY{n}{imread}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{test\PYZus{}images/solidWhiteCurve.jpg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} image = mpimg.imread(\PYZsq{}test\PYZus{}images/solidYellowCurve.jpg\PYZsq{})}
+        
+        \PY{c+c1}{\PYZsh{}printing out some stats and plotting}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{This image is:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n+nb}{type}\PY{p}{(}\PY{n}{image}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{with dimensions:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{image}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{image}\PY{p}{)}  \PY{c+c1}{\PYZsh{} if you wanted to show a single color channel image called \PYZsq{}gray\PYZsq{}, for example, call as plt.imshow(gray, cmap=\PYZsq{}gray\PYZsq{})}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+This image is: <class 'numpy.ndarray'> with dimensions: (540, 960, 3)
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}2}]:} <matplotlib.image.AxesImage at 0x7f0112d3d5f8>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_6_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{ideas-for-lane-detection-pipeline}{%
+\subsection{Ideas for Lane Detection
+Pipeline}\label{ideas-for-lane-detection-pipeline}}
+
+    \textbf{Some OpenCV functions (beyond those introduced in the lesson)
+that might be useful for this project are:}
+
+\texttt{cv2.inRange()} for color selection\\
+\texttt{cv2.fillPoly()} for regions selection\\
+\texttt{cv2.line()} to draw lines on an image given endpoints\\
+\texttt{cv2.addWeighted()} to coadd / overlay two images
+\texttt{cv2.cvtColor()} to grayscale or change color
+\texttt{cv2.imwrite()} to output images to file\\
+\texttt{cv2.bitwise\_and()} to apply a mask to an image
+
+\textbf{Check out the OpenCV documentation to learn about these and
+discover even more awesome functionality!}
+
+    \hypertarget{helper-functions}{%
+\subsection{Helper Functions}\label{helper-functions}}
+
+    Below are some helper functions to help get you started. They should
+look familiar from the lesson!
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{k+kn}{import} \PY{n+nn}{math}
+         
+         
+         \PY{k}{def} \PY{n+nf}{grayscale}\PY{p}{(}\PY{n}{img}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Applies the Grayscale transform}
+         \PY{l+s+sd}{    This will return an image with only one color channel}
+         \PY{l+s+sd}{    but NOTE: to see the returned image as grayscale}
+         \PY{l+s+sd}{    (assuming your grayscaled image is called \PYZsq{}gray\PYZsq{})}
+         \PY{l+s+sd}{    you should call plt.imshow(gray, cmap=\PYZsq{}gray\PYZsq{})\PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{k}{return} \PY{n}{cv2}\PY{o}{.}\PY{n}{cvtColor}\PY{p}{(}\PY{n}{img}\PY{p}{,} \PY{n}{cv2}\PY{o}{.}\PY{n}{COLOR\PYZus{}RGB2GRAY}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{} Or use BGR2GRAY if you read an image with cv2.imread()}
+             \PY{c+c1}{\PYZsh{} return cv2.cvtColor(img, cv2.COLOR\PYZus{}BGR2GRAY)}
+             
+             
+         \PY{k}{def} \PY{n+nf}{canny}\PY{p}{(}\PY{n}{img}\PY{p}{,} \PY{n}{low\PYZus{}threshold}\PY{p}{,} \PY{n}{high\PYZus{}threshold}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Applies the Canny transform\PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{k}{return} \PY{n}{cv2}\PY{o}{.}\PY{n}{Canny}\PY{p}{(}\PY{n}{img}\PY{p}{,} \PY{n}{low\PYZus{}threshold}\PY{p}{,} \PY{n}{high\PYZus{}threshold}\PY{p}{)}
+         
+         
+         \PY{k}{def} \PY{n+nf}{region\PYZus{}of\PYZus{}interest}\PY{p}{(}\PY{n}{img}\PY{p}{,} \PY{n}{vertices}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    Applies an image mask. }
+         \PY{l+s+sd}{    Only keeps the region of the image defined by the polygon formed from `vertices`. The rest of the image is set to black.}
+         \PY{l+s+sd}{    `vertices` should be a numpy array of integer points.}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+         
+             \PY{c+c1}{\PYZsh{} define a blank mask which matches the image height \PYZam{} width}
+             \PY{n}{mask} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros\PYZus{}like}\PY{p}{(}\PY{n}{img}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} define a 3 channel or 1 channel color to fill the mask with depending on the input image}
+             \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{img}\PY{o}{.}\PY{n}{shape}\PY{p}{)} \PY{o}{\PYZgt{}} \PY{l+m+mi}{2}\PY{p}{:}
+                 \PY{n}{channel\PYZus{}count} \PY{o}{=} \PY{n}{img}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}  \PY{c+c1}{\PYZsh{} i.e. 3 or 4 depending on your image}
+                 \PY{n}{ignore\PYZus{}mask\PYZus{}color} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{255}\PY{p}{,}\PY{p}{)} \PY{o}{*} \PY{n}{channel\PYZus{}count}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{n}{ignore\PYZus{}mask\PYZus{}color} \PY{o}{=} \PY{l+m+mi}{10}
+                 
+             \PY{c+c1}{\PYZsh{} filling pixels inside the polygon defined by \PYZdq{}vertices\PYZdq{} with the fill color    }
+             \PY{n}{cv2}\PY{o}{.}\PY{n}{fillPoly}\PY{p}{(}\PY{n}{mask}\PY{p}{,} \PY{n}{vertices}\PY{p}{,} \PY{n}{ignore\PYZus{}mask\PYZus{}color}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} returning the image only where mask pixels match (nonzero)}
+             \PY{n}{masked\PYZus{}image} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{bitwise\PYZus{}and}\PY{p}{(}\PY{n}{img}\PY{p}{,} \PY{n}{mask}\PY{p}{)}
+             \PY{k}{return} \PY{n}{masked\PYZus{}image}
+         
+         
+         \PY{k}{def} \PY{n+nf}{gaussian\PYZus{}blur}\PY{p}{(}\PY{n}{img}\PY{p}{,} \PY{n}{kernel\PYZus{}size}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Applies a Gaussian Noise kernel\PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{k}{return} \PY{n}{cv2}\PY{o}{.}\PY{n}{GaussianBlur}\PY{p}{(}\PY{n}{img}\PY{p}{,} \PY{p}{(}\PY{n}{kernel\PYZus{}size}\PY{p}{,} \PY{n}{kernel\PYZus{}size}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}
+         
+         
+         \PY{k}{def} \PY{n+nf}{hough\PYZus{}lines}\PY{p}{(}\PY{n}{img}\PY{p}{,} \PY{n}{rho}\PY{p}{,} \PY{n}{theta}\PY{p}{,} \PY{n}{threshold}\PY{p}{,} \PY{n}{min\PYZus{}line\PYZus{}len}\PY{p}{,} \PY{n}{max\PYZus{}line\PYZus{}gap}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    `img` should be the output of a Canny transform.}
+         \PY{l+s+sd}{        }
+         \PY{l+s+sd}{    Returns an image with hough lines drawn.}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{c+c1}{\PYZsh{} Output \PYZdq{}lines\PYZdq{} is an array containing endpoints of detected line segments}
+             \PY{n}{lines} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{HoughLinesP}\PY{p}{(}\PY{n}{img}\PY{p}{,} \PY{n}{rho}\PY{p}{,} \PY{n}{theta}\PY{p}{,} \PY{n}{threshold}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{minLineLength} \PY{o}{=} \PY{n}{min\PYZus{}line\PYZus{}len}\PY{p}{,} \PY{n}{maxLineGap} \PY{o}{=} \PY{n}{max\PYZus{}line\PYZus{}gap}\PY{p}{)} \PY{c+c1}{\PYZsh{} return (x,y)}
+             \PY{c+c1}{\PYZsh{} print(lines) \PYZsh{}  return two endpoints of the deteced line segment : [x1, y1, x2, y2] }
+             
+             \PY{k}{return} \PY{n}{lines}
+         
+             
+         \PY{c+c1}{\PYZsh{}     line\PYZus{}img = np.zeros((img.shape[0], img.shape[1], 3), dtype = np.uint8) \PYZsh{} blank image to draw lines on}
+         
+         \PY{c+c1}{\PYZsh{}     draw\PYZus{}lines(line\PYZus{}img, lines) }
+         
+         
+         \PY{k}{def} \PY{n+nf}{draw\PYZus{}lines}\PY{p}{(}\PY{n}{img}\PY{p}{,} \PY{n}{lines}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{255}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{thickness}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    NOTE: this is the function you might want to use as a starting point }
+         \PY{l+s+sd}{    once you want to average/extrapolate the line segments you detect to map out }
+         \PY{l+s+sd}{    the full extent of the lane (going from the result shown in raw\PYZhy{}lines\PYZhy{}example.mp4}
+         \PY{l+s+sd}{    to that shown in P1\PYZus{}example.mp4).  }
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    Think about things like separating line segments by their }
+         \PY{l+s+sd}{    slope ((y2\PYZhy{}y1)/(x2\PYZhy{}x1)) to decide which segments are part of the left}
+         \PY{l+s+sd}{    line vs. the right line.  Then, you can average the position of each of }
+         \PY{l+s+sd}{    the lines and extrapolate to the top and bottom of the lane.}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    This function draws `lines` with `color` and `thickness`.    }
+         \PY{l+s+sd}{    Lines are drawn on the image inplace (mutates the image).}
+         \PY{l+s+sd}{    If you want to make the lines semi\PYZhy{}transparent, think about combining}
+         \PY{l+s+sd}{    this function with the weighted\PYZus{}img() function below}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{c+c1}{\PYZsh{}     \PYZsh{}original code}
+         \PY{c+c1}{\PYZsh{}     for line in lines:}
+         \PY{c+c1}{\PYZsh{}         for x1, y1, x2, y2 in line:}
+         \PY{c+c1}{\PYZsh{}             cv2.line(img, (x1, y1), (x2, y2), color, thickness)}
+         
+             \PY{n}{line\PYZus{}img} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{img}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{img}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,} \PY{n}{dtype} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{uint8}\PY{p}{)} \PY{c+c1}{\PYZsh{} blank image that matches the original in size}
+             
+             \PY{k}{if} \PY{n}{lines} \PY{o+ow}{is} \PY{k+kc}{None}\PY{p}{:}
+                 \PY{k}{return}
+             
+             \PY{c+c1}{\PYZsh{} Loop over all lines and draw them on the blank image}
+             \PY{k}{for} \PY{n}{line} \PY{o+ow}{in} \PY{n}{lines}\PY{p}{:}
+         \PY{c+c1}{\PYZsh{}         print(\PYZdq{}line: \PYZdq{}, line)}
+                 \PY{k}{for} \PY{n}{x1}\PY{p}{,} \PY{n}{y1}\PY{p}{,} \PY{n}{x2}\PY{p}{,} \PY{n}{y2} \PY{o+ow}{in} \PY{n}{line}\PY{p}{:}
+         \PY{c+c1}{\PYZsh{}             print(\PYZdq{}x1,y1,x2,y2: \PYZdq{}, x1,y1,x2,y2)}
+                     \PY{n}{cv2}\PY{o}{.}\PY{n}{line}\PY{p}{(}\PY{n}{line\PYZus{}img}\PY{p}{,} \PY{p}{(}\PY{n}{x1}\PY{p}{,} \PY{n}{y1}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{n}{x2}\PY{p}{,} \PY{n}{y2}\PY{p}{)}\PY{p}{,} \PY{n}{color}\PY{p}{,} \PY{n}{thickness}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}             m = (y2 \PYZhy{} y1) / (x2 \PYZhy{} x1)}
+         \PY{c+c1}{\PYZsh{}             if m \PYZlt{} 0:}
+         \PY{c+c1}{\PYZsh{}                 m\PYZus{}left = m\PYZus{}left + m}
+         \PY{c+c1}{\PYZsh{}                 x\PYZus{}left = x\PYZus{}left + (x1 + x2)}
+         \PY{c+c1}{\PYZsh{}                 y\PYZus{}left = y\PYZus{}left + (y1 + y2)}
+         \PY{c+c1}{\PYZsh{}                 num\PYZus{}left = num\PYZus{}left + 1}
+         
+         \PY{c+c1}{\PYZsh{}             else:}
+         \PY{c+c1}{\PYZsh{}                 m\PYZus{}right = m\PYZus{}right + m}
+         \PY{c+c1}{\PYZsh{}                 x\PYZus{}right = x\PYZus{}right + (x1+x2)}
+         \PY{c+c1}{\PYZsh{}                 y\PYZus{}right = y\PYZus{}right + (y1+y2)}
+         \PY{c+c1}{\PYZsh{}                 num\PYZus{}right = num\PYZus{}right + 1}
+                 
+             \PY{k}{return} \PY{n}{line\PYZus{}img}
+                 
+                 
+                 
+         \PY{c+c1}{\PYZsh{}\PYZsh{} define slope = (x(init),y(init)) to (x(last), y(last))        }
+                 
+         \PY{c+c1}{\PYZsh{}             if x1 and x2 \PYZlt{}= 500:}
+         \PY{c+c1}{\PYZsh{}                 x\PYZus{}left.append(x1)}
+         \PY{c+c1}{\PYZsh{}                 x\PYZus{}left.append(x2)}
+         \PY{c+c1}{\PYZsh{}                 y\PYZus{}left.append(y1)}
+         \PY{c+c1}{\PYZsh{}                 y\PYZus{}left.append(y2)}
+                         
+         \PY{c+c1}{\PYZsh{}             else:}
+         \PY{c+c1}{\PYZsh{}                 x\PYZus{}right.append(x1)}
+         \PY{c+c1}{\PYZsh{}                 x\PYZus{}right.append(x2)}
+         \PY{c+c1}{\PYZsh{}                 y\PYZus{}right.append(y1)}
+         \PY{c+c1}{\PYZsh{}                 y\PYZus{}right.append(y1)}
+         \PY{c+c1}{\PYZsh{}                 cv2.line(img, (x1, y1), (x2, y2), color, thickness)}
+         \PY{c+c1}{\PYZsh{}                 print(cv2.line(img, (x1, y1), (x2, y2), color, thickness))}
+                         
+                     
+         \PY{c+c1}{\PYZsh{}     \PYZsh{} left line            }
+         \PY{c+c1}{\PYZsh{}     x0 = x\PYZus{}left[0]}
+         \PY{c+c1}{\PYZsh{}     y0 = y\PYZus{}left[0]}
+             
+         \PY{c+c1}{\PYZsh{}     x\PYZus{}left.sort()}
+         \PY{c+c1}{\PYZsh{}     y\PYZus{}left.sort()}
+         \PY{c+c1}{\PYZsh{}     len\PYZus{}x\PYZus{}left = len(x\PYZus{}left)}
+         \PY{c+c1}{\PYZsh{}     len\PYZus{}y\PYZus{}left = len(y\PYZus{}left)}
+             
+         \PY{c+c1}{\PYZsh{}     m\PYZus{}left = (y\PYZus{}left[0] \PYZhy{} y\PYZus{}left[len\PYZus{}y\PYZus{}left \PYZhy{} 1]) / (x\PYZus{}left[len\PYZus{}x\PYZus{}left \PYZhy{} 1] \PYZhy{} x\PYZus{}left[0])}
+         \PY{c+c1}{\PYZsh{}     b\PYZus{}left = y0 \PYZhy{} (x0 * m\PYZus{}left)}
+         \PY{c+c1}{\PYZsh{}     x\PYZus{}start\PYZus{}left = int((540 \PYZhy{} b\PYZus{}left)/m\PYZus{}left)}
+             
+             
+             \PY{c+c1}{\PYZsh{} right line \PYZhy{}\PYZgt{} [fail]. because it depends too much on the slope..}
+         \PY{c+c1}{\PYZsh{}     x1 = x\PYZus{}right[0]}
+         \PY{c+c1}{\PYZsh{}     y1 = y\PYZus{}right[0]}
+         
+         \PY{c+c1}{\PYZsh{}     x\PYZus{}right.sort()}
+         \PY{c+c1}{\PYZsh{}     y\PYZus{}right.sort()}
+         \PY{c+c1}{\PYZsh{}     len\PYZus{}x\PYZus{}right = len(x\PYZus{}right)}
+         \PY{c+c1}{\PYZsh{}     len\PYZus{}y\PYZus{}right = len(y\PYZus{}right)}
+             
+         \PY{c+c1}{\PYZsh{}     m\PYZus{}right = (y\PYZus{}right[0] \PYZhy{} y\PYZus{}right[len\PYZus{}y\PYZus{}right \PYZhy{} 1]) / (x\PYZus{}right[0] \PYZhy{} x\PYZus{}right[len\PYZus{}x\PYZus{}right \PYZhy{} 1])}
+         \PY{c+c1}{\PYZsh{}     b\PYZus{}right = y1 \PYZhy{} (x1 * m\PYZus{}right)}
+         \PY{c+c1}{\PYZsh{}     x\PYZus{}start\PYZus{}right = int((540 \PYZhy{} b\PYZus{}right)/m\PYZus{}right)}
+             
+         \PY{c+c1}{\PYZsh{}     cv2.line(img, (x\PYZus{}left[0], y\PYZus{}left[0]), (x\PYZus{}left[len\PYZus{}x\PYZus{}left \PYZhy{} 1], y\PYZus{}left[len\PYZus{}y\PYZus{}left \PYZhy{} 1]), color, thickness )        \PYZsh{} test\PYZus{}images: solidWhiteRight}
+         \PY{c+c1}{\PYZsh{}     cv2.line(img, (x\PYZus{}left[0], y\PYZus{}left[len\PYZus{}y\PYZus{}left \PYZhy{} 1]), (x\PYZus{}left[len\PYZus{}x\PYZus{}left \PYZhy{} 1], y\PYZus{}left[0]), color, thickness )        }
+         \PY{c+c1}{\PYZsh{}     cv2.line(img, (x\PYZus{}start\PYZus{}left, 540), (x\PYZus{}left[len\PYZus{}x\PYZus{}left \PYZhy{} 1], y\PYZus{}left[0]), color, thickness )    }
+         \PY{c+c1}{\PYZsh{}     cv2.line(img, (x\PYZus{}start\PYZus{}right, 540), (x\PYZus{}right[0], y\PYZus{}left[0]), color, thickness )    }
+         
+         
+         
+         
+         
+         \PY{c+c1}{\PYZsh{} Python 3 has support for cool math symbols.}
+         
+         \PY{c+c1}{\PYZsh{} Merge the image with the lines onto the original.}
+         \PY{k}{def} \PY{n+nf}{weighted\PYZus{}img}\PY{p}{(}\PY{n}{img}\PY{p}{,} \PY{n}{initial\PYZus{}img}\PY{p}{,} \PY{n}{α}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{β}\PY{o}{=}\PY{l+m+mf}{1.7}\PY{p}{,} \PY{n}{γ}\PY{o}{=}\PY{l+m+mf}{0.}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    `img` is the output of the hough\PYZus{}lines(), An image with lines drawn on it.}
+         \PY{l+s+sd}{    Should be a blank image (all black) with lines drawn on it.}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    `initial\PYZus{}img` should be the image before any processing.}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    The result image is computed as follows:}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    initial\PYZus{}img * α + img * β + γ}
+         \PY{l+s+sd}{    NOTE: initial\PYZus{}img and img must be the same shape!}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+         
+             \PY{k}{return} \PY{n}{cv2}\PY{o}{.}\PY{n}{addWeighted}\PY{p}{(}\PY{n}{initial\PYZus{}img}\PY{p}{,} \PY{n}{α}\PY{p}{,} \PY{n}{img}\PY{p}{,} \PY{n}{β}\PY{p}{,} \PY{n}{γ}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{k}{def} \PY{n+nf}{test}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{n}{list1} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{]}
+             \PY{n}{list2} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{,}\PY{l+m+mi}{7}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{]}
+         \PY{c+c1}{\PYZsh{}     list1.sort()}
+             \PY{k}{return} \PY{n}{list1}\PY{p}{,} \PY{n}{list2}
+         
+         \PY{n}{whatarethey} \PY{o}{=} \PY{n}{test}\PY{p}{(}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{whatarethey}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{whatarethey}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+([1, 2, 3, 4], [5, 6, 7, 8])
+[1, 2, 3, 4]
+
+    \end{Verbatim}
+
+    print(whatarethey) \#\# Test Images
+
+Build your pipeline to work on the images in the directory
+``test\_images''\\
+\textbf{You should make sure your pipeline works well on these images
+before you try the videos.}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{k+kn}{import} \PY{n+nn}{os}
+         \PY{n}{os}\PY{o}{.}\PY{n}{listdir}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{test\PYZus{}images/}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}20}]:} ['solidWhiteCurve.jpg',
+          'whiteCarLaneSwitch.jpg',
+          'solidYellowCurve.jpg',
+          'solidYellowLeft.jpg',
+          'solidWhiteRight.jpg',
+          'solidYellowCurve2.jpg']
+\end{Verbatim}
+            
+    \hypertarget{build-a-lane-finding-pipeline}{%
+\subsection{Build a Lane Finding
+Pipeline}\label{build-a-lane-finding-pipeline}}
+
+    Build the pipeline and run your solution on all test\_images. Make
+copies into the \texttt{test\_images\_output} directory, and you can use
+the images in your writeup report.
+
+Try tuning the various parameters, especially the low and high Canny
+thresholds as well as the Hough lines parameters.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{image}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}
+         
+         \PY{c+c1}{\PYZsh{}\PYZsh{} Convert to grayscale}
+         \PY{n}{gray\PYZus{}image} \PY{o}{=} \PY{n}{grayscale}\PY{p}{(}\PY{n}{image}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{gray\PYZus{}image}\PY{p}{,} \PY{n}{cmap} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gray}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}
+         
+         
+         \PY{c+c1}{\PYZsh{}\PYZsh{} Call Canny Edge Detection (return single pixels \PYZdq{}indicating an edge\PYZdq{}, but just a point, not a line)}
+         \PY{n}{low\PYZus{}threshold} \PY{o}{=} \PY{l+m+mi}{100}
+         \PY{n}{high\PYZus{}threshold} \PY{o}{=} \PY{l+m+mi}{200}
+         \PY{n}{cannyed\PYZus{}image} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{Canny}\PY{p}{(}\PY{n}{gray\PYZus{}image}\PY{p}{,} \PY{n}{low\PYZus{}threshold}\PY{p}{,} \PY{n}{high\PYZus{}threshold}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{cannyed\PYZus{}image}\PY{p}{,} \PY{n}{cmap} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Greys\PYZus{}r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}
+         
+         
+         \PY{c+c1}{\PYZsh{} Deifne and Crop the Region of Interest}
+         \PY{n}{imshape} \PY{o}{=} \PY{n}{image}\PY{o}{.}\PY{n}{shape}
+         \PY{n}{ROI\PYZus{}vertices} \PY{o}{=} \PY{p}{[}
+             \PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{imshape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{,}
+             \PY{p}{(}\PY{l+m+mi}{450}\PY{p}{,} \PY{l+m+mi}{320}\PY{p}{)}\PY{p}{,}
+             \PY{p}{(}\PY{l+m+mi}{500}\PY{p}{,} \PY{l+m+mi}{320}\PY{p}{)}\PY{p}{,}
+             \PY{p}{(}\PY{n}{imshape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{imshape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{,}    
+         \PY{p}{]}
+         
+         \PY{n}{cropped\PYZus{}image} \PY{o}{=} \PY{n}{region\PYZus{}of\PYZus{}interest}\PY{p}{(}
+             \PY{n}{cannyed\PYZus{}image}\PY{p}{,} 
+             \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n}{ROI\PYZus{}vertices}\PY{p}{]}\PY{p}{,} \PY{n}{dtype} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{int32}\PY{p}{)}\PY{p}{,}
+         \PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{cropped\PYZus{}image}\PY{p}{,} \PY{n}{cmap} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Greys\PYZus{}r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}
+         
+         
+         \PY{c+c1}{\PYZsh{}\PYZsh{} Hough Transform : link the pixels representing edges to make a line in common}
+         \PY{n}{rho} \PY{o}{=} \PY{l+m+mi}{6} \PY{c+c1}{\PYZsh{} ditance resolution in pixels of the Hough grid}
+         \PY{n}{theta} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{/}\PY{l+m+mi}{180} \PY{c+c1}{\PYZsh{}angular resolution in radians of the Hough grid   \PYZsh{}theta = np.pi/180}
+         \PY{n}{threshold} \PY{o}{=} \PY{l+m+mi}{20} \PY{c+c1}{\PYZsh{} minimum number of votes (intersections in Hough grid cell) \PYZsh{}threshold = 20}
+         \PY{n}{min\PYZus{}line\PYZus{}len} \PY{o}{=} \PY{l+m+mi}{3} \PY{c+c1}{\PYZsh{} minimum number of pixels making up a line \PYZsh{}min\PYZus{}line\PYZus{}len = 3}
+         \PY{n}{max\PYZus{}line\PYZus{}gap} \PY{o}{=} \PY{l+m+mi}{10} \PY{c+c1}{\PYZsh{} maximum gap in pixels between connectable line segments \PYZsh{}max\PYZus{}line\PYZus{}gap = 10}
+         
+         \PY{n}{lines} \PY{o}{=} \PY{n}{hough\PYZus{}lines}\PY{p}{(}\PY{n}{cropped\PYZus{}image}\PY{p}{,} \PY{n}{rho}\PY{p}{,} \PY{n}{theta}\PY{p}{,} \PY{n}{threshold}\PY{p}{,} \PY{n}{min\PYZus{}line\PYZus{}len}\PY{p}{,} \PY{n}{max\PYZus{}line\PYZus{}gap}\PY{p}{)} \PY{c+c1}{\PYZsh{} returns (x1, x2, y1, y2)}
+         
+         
+         \PY{c+c1}{\PYZsh{}\PYZsh{} Rendering detected Hough LInes as an Overlay : detected lines on the original image}
+         \PY{n}{line\PYZus{}image} \PY{o}{=} \PY{n}{draw\PYZus{}lines}\PY{p}{(}\PY{n}{cannyed\PYZus{}image}\PY{p}{,} \PY{n}{lines}\PY{p}{)} 
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{line\PYZus{}image}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}
+         
+         
+         \PY{c+c1}{\PYZsh{}\PYZsh{} Merge the image with the lines onto the original}
+         \PY{n}{merged\PYZus{}image} \PY{o}{=} \PY{n}{weighted\PYZus{}img}\PY{p}{(}\PY{n}{line\PYZus{}image}\PY{p}{,} \PY{n}{image}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{merged\PYZus{}image}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}
+         
+         
+         
+         \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+         \PY{c+c1}{\PYZsh{} Create a Single Left and Right Lane LIne \PYZsh{}}
+         \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+         \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{This can be done by fitting a simple linear model to the various endpoints of the line segments in each group,}
+         \PY{l+s+sd}{then rendering a single overlay line on that linear model.}
+         \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         
+         \PY{c+c1}{\PYZsh{}\PYZsh{} Distinguish the Left and Right lane : Check the direction of the line\PYZsq{}s slope}
+         \PY{n}{left\PYZus{}line\PYZus{}x} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{left\PYZus{}line\PYZus{}y} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{right\PYZus{}line\PYZus{}x} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{right\PYZus{}line\PYZus{}y} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         
+         \PY{k}{for} \PY{n}{line} \PY{o+ow}{in} \PY{n}{lines}\PY{p}{:}
+             \PY{k}{for} \PY{n}{x1}\PY{p}{,} \PY{n}{y1}\PY{p}{,} \PY{n}{x2}\PY{p}{,} \PY{n}{y2} \PY{o+ow}{in} \PY{n}{line}\PY{p}{:}
+                 \PY{n}{slope} \PY{o}{=} \PY{p}{(}\PY{n}{y2} \PY{o}{\PYZhy{}} \PY{n}{y1}\PY{p}{)} \PY{o}{/} \PY{p}{(}\PY{n}{x2} \PY{o}{\PYZhy{}} \PY{n}{x1}\PY{p}{)}
+         
+                 \PY{k}{if} \PY{n}{slope} \PY{o}{\PYZlt{}} \PY{l+m+mi}{0}\PY{p}{:}    \PY{c+c1}{\PYZsh{} left group}
+                     \PY{n}{left\PYZus{}line\PYZus{}x}\PY{o}{.}\PY{n}{extend}\PY{p}{(}\PY{p}{[}\PY{n}{x1}\PY{p}{,} \PY{n}{x2}\PY{p}{]}\PY{p}{)}
+                     \PY{n}{left\PYZus{}line\PYZus{}y}\PY{o}{.}\PY{n}{extend}\PY{p}{(}\PY{p}{[}\PY{n}{y1}\PY{p}{,} \PY{n}{y2}\PY{p}{]}\PY{p}{)}
+                 \PY{k}{else}\PY{p}{:}              \PY{c+c1}{\PYZsh{}right group}
+                     \PY{n}{right\PYZus{}line\PYZus{}x}\PY{o}{.}\PY{n}{extend}\PY{p}{(}\PY{p}{[}\PY{n}{x1}\PY{p}{,} \PY{n}{x2}\PY{p}{]}\PY{p}{)}
+                     \PY{n}{right\PYZus{}line\PYZus{}y}\PY{o}{.}\PY{n}{extend}\PY{p}{(}\PY{p}{[}\PY{n}{y1}\PY{p}{,} \PY{n}{y2}\PY{p}{]}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}\PYZsh{} Create a Single Linear Representation of each Line Group}
+         \PY{c+c1}{\PYZsh{} Two known value: y values for the top and bottom endpoints }
+         \PY{n}{min\PYZus{}y} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{image}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{*} \PY{p}{(}\PY{l+m+mi}{3} \PY{o}{/} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} Just below the horizon}
+         \PY{n}{max\PYZus{}y} \PY{o}{=} \PY{n}{image}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{c+c1}{\PYZsh{} The bottom of the image}
+         
+         \PY{c+c1}{\PYZsh{} Get the parameters for 1D polynomial y = mx + b, which is fit to the points }
+         \PY{n}{poly\PYZus{}left\PYZus{}param} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{polyfit}\PY{p}{(}\PY{n}{left\PYZus{}line\PYZus{}y}\PY{p}{,} \PY{n}{left\PYZus{}line\PYZus{}x}\PY{p}{,} \PY{n}{deg} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)} \PY{c+c1}{\PYZsh{}return (m,b)}
+         \PY{n}{poly\PYZus{}right\PYZus{}param} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{polyfit}\PY{p}{(}\PY{n}{right\PYZus{}line\PYZus{}y}\PY{p}{,} \PY{n}{right\PYZus{}line\PYZus{}x}\PY{p}{,} \PY{n}{deg} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Get the Left Line}
+         \PY{n}{poly\PYZus{}left\PYZus{}line} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{poly1d}\PY{p}{(}\PY{n}{poly\PYZus{}left\PYZus{}param}\PY{p}{)}
+         \PY{n}{left\PYZus{}x\PYZus{}start} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{poly\PYZus{}left\PYZus{}line}\PY{p}{(}\PY{n}{max\PYZus{}y}\PY{p}{)}\PY{p}{)}
+         \PY{n}{left\PYZus{}x\PYZus{}end} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{poly\PYZus{}left\PYZus{}line}\PY{p}{(}\PY{n}{min\PYZus{}y}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Get the RIght LIne}
+         \PY{n}{poly\PYZus{}right\PYZus{}line} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{poly1d}\PY{p}{(}\PY{n}{poly\PYZus{}right\PYZus{}param}\PY{p}{)}
+         \PY{n}{right\PYZus{}x\PYZus{}start} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{poly\PYZus{}right\PYZus{}line}\PY{p}{(}\PY{n}{max\PYZus{}y}\PY{p}{)}\PY{p}{)}
+         \PY{n}{right\PYZus{}x\PYZus{}end} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{poly\PYZus{}right\PYZus{}line}\PY{p}{(}\PY{n}{min\PYZus{}y}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{line\PYZus{}image\PYZus{}2} \PY{o}{=} \PY{n}{draw\PYZus{}lines}\PY{p}{(}
+             \PY{n}{image}\PY{p}{,}
+             \PY{p}{[}\PY{p}{[}
+                 \PY{p}{[}\PY{n}{left\PYZus{}x\PYZus{}start}\PY{p}{,} \PY{n}{max\PYZus{}y}\PY{p}{,} \PY{n}{left\PYZus{}x\PYZus{}end}\PY{p}{,} \PY{n}{min\PYZus{}y}\PY{p}{]}\PY{p}{,}
+                 \PY{p}{[}\PY{n}{right\PYZus{}x\PYZus{}start}\PY{p}{,} \PY{n}{max\PYZus{}y}\PY{p}{,} \PY{n}{right\PYZus{}x\PYZus{}end}\PY{p}{,} \PY{n}{min\PYZus{}y}\PY{p}{]}\PY{p}{,}
+             \PY{p}{]}\PY{p}{]}\PY{p}{,}
+             \PY{n}{thickness} \PY{o}{=} \PY{l+m+mi}{5}\PY{p}{,}
+         \PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{line\PYZus{}image\PYZus{}2}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}
+         
+         
+         
+         \PY{n}{merged\PYZus{}image\PYZus{}2} \PY{o}{=} \PY{n}{weighted\PYZus{}img}\PY{p}{(}\PY{n}{line\PYZus{}image\PYZus{}2}\PY{p}{,} \PY{n}{image}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{merged\PYZus{}image\PYZus{}2}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}21}]:} <function matplotlib.pyplot.show(*args, **kw)>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_17_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_17_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_17_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_17_4.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_17_5.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_17_6.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_17_7.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_17_8.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} TODO: Build your pipeline that will draw lane lines on the test\PYZus{}images}
+        \PY{c+c1}{\PYZsh{} then save them to the test\PYZus{}images\PYZus{}output directory.}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{image}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Read in and grayscale the image}
+        \PY{n}{image\PYZus{}gray} \PY{o}{=} \PY{n}{grayscale}\PY{p}{(}\PY{n}{image}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{image\PYZus{}gray}\PY{p}{,} \PY{n}{cmap} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gray}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        
+        \PY{c+c1}{\PYZsh{} Gaussian smoothing}
+        \PY{n}{kernel\PYZus{}size} \PY{o}{=} \PY{l+m+mi}{3}
+        \PY{n}{image\PYZus{}gray\PYZus{}blur} \PY{o}{=} \PY{n}{gaussian\PYZus{}blur}\PY{p}{(}\PY{n}{image\PYZus{}gray}\PY{p}{,} \PY{n}{kernel\PYZus{}size}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{image\PYZus{}gray\PYZus{}blur}\PY{p}{)}
+        
+        
+        \PY{c+c1}{\PYZsh{} Canny Edge detection}
+        \PY{n}{low\PYZus{}threshold} \PY{o}{=} \PY{l+m+mi}{100}
+        \PY{n}{high\PYZus{}threshold} \PY{o}{=} \PY{l+m+mi}{200}
+        \PY{n}{image\PYZus{}canny} \PY{o}{=} \PY{n}{canny}\PY{p}{(}\PY{n}{image\PYZus{}gray\PYZus{}blur}\PY{p}{,} \PY{n}{low\PYZus{}threshold}\PY{p}{,} \PY{n}{high\PYZus{}threshold}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{image\PYZus{}canny}\PY{p}{,} \PY{n}{cmap} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Greys\PYZus{}r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        
+        \PY{c+c1}{\PYZsh{} ROI Mask}
+        \PY{n}{imshape} \PY{o}{=} \PY{n}{image}\PY{o}{.}\PY{n}{shape} \PY{c+c1}{\PYZsh{} shape: return image\PYZsq{}s array size as tuple(?)}
+        
+        \PY{c+c1}{\PYZsh{}vertices = np.array( [ [ (0, imshape[0]), (450, 320), (500, 320), (imshape[1], imshape[0]) ] ], dtype = np.int32)}
+        
+        \PY{n}{vertices} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(} \PY{p}{[} \PY{p}{[} \PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{imshape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{450}\PY{p}{,} \PY{l+m+mi}{320}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{500}\PY{p}{,} \PY{l+m+mi}{320}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{n}{imshape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{imshape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)} \PY{p}{]} \PY{p}{]}\PY{p}{)}
+        
+        
+        
+        \PY{n}{image\PYZus{}ROI} \PY{o}{=} \PY{n}{region\PYZus{}of\PYZus{}interest}\PY{p}{(}\PY{n}{image\PYZus{}canny}\PY{p}{,} \PY{n}{vertices}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{image\PYZus{}ROI}\PY{p}{)}
+        
+        
+        \PY{c+c1}{\PYZsh{} Hough transform}
+        \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{l+s+sd}{Hough Algorithm steps}
+        
+        \PY{l+s+sd}{1. Corner or edge detection}
+        \PY{l+s+sd}{    \PYZhy{} Take grey/binary image which have 0s indicating non\PYZhy{}edges and 1s indicating edges. This is the input image for Hough TF}
+        \PY{l+s+sd}{2. Rho range and Theta range creation.}
+        \PY{l+s+sd}{    \PYZhy{} }
+        
+        \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{n}{rho} \PY{o}{=} \PY{l+m+mi}{5} \PY{c+c1}{\PYZsh{} ditance resolution in pixels of the Hough grid}
+        \PY{n}{theta} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{/}\PY{l+m+mi}{180} \PY{c+c1}{\PYZsh{}angular resolution in radians of the Hough grid}
+        \PY{n}{threshold} \PY{o}{=} \PY{l+m+mi}{20} \PY{c+c1}{\PYZsh{} minimum number of votes (intersections in Hough grid cell)}
+        \PY{n}{min\PYZus{}line\PYZus{}len} \PY{o}{=} \PY{l+m+mi}{3} \PY{c+c1}{\PYZsh{} minimum number of pixels making up a line}
+        \PY{n}{max\PYZus{}line\PYZus{}gap} \PY{o}{=} \PY{l+m+mi}{10} \PY{c+c1}{\PYZsh{} maximum gap in pixels between connectable line segments}
+        
+        \PY{n}{image\PYZus{}hough\PYZus{}lines} \PY{o}{=} \PY{n}{hough\PYZus{}lines}\PY{p}{(}\PY{n}{image\PYZus{}ROI}\PY{p}{,} \PY{n}{rho}\PY{p}{,} \PY{n}{theta}\PY{p}{,} \PY{n}{threshold}\PY{p}{,} \PY{n}{min\PYZus{}line\PYZus{}len}\PY{p}{,} \PY{n}{max\PYZus{}line\PYZus{}gap}\PY{p}{)} 
+        \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{image\PYZus{}hough\PYZus{}lines}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Combine with image}
+        \PY{n}{color\PYZus{}edges} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{dstack}\PY{p}{(}\PY{p}{(}\PY{n}{image\PYZus{}canny}\PY{p}{,} \PY{n}{image\PYZus{}canny}\PY{p}{,} \PY{n}{image\PYZus{}canny}\PY{p}{)}\PY{p}{)}
+        \PY{n}{image\PYZus{}combined} \PY{o}{=} \PY{n}{weighted\PYZus{}img}\PY{p}{(}\PY{n}{image\PYZus{}hough\PYZus{}lines}\PY{p}{,} \PY{n}{color\PYZus{}edges}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{l+m+mi}{6}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{image\PYZus{}combined}\PY{p}{)}
+        
+        \PY{n}{image\PYZus{}combined2} \PY{o}{=} \PY{n}{weighted\PYZus{}img}\PY{p}{(}\PY{n}{image\PYZus{}hough\PYZus{}lines}\PY{p}{,} \PY{n}{image}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{l+m+mi}{7}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{image\PYZus{}combined2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{test-on-videos}{%
+\subsection{Test on Videos}\label{test-on-videos}}
+
+You know what's cooler than drawing lanes over images? Drawing lanes
+over video!
+
+We can test our solution on two provided videos:
+
+\texttt{solidWhiteRight.mp4}
+
+\texttt{solidYellowLeft.mp4}
+
+\textbf{Note: if you get an import error when you run the next cell, try
+changing your kernel (select the Kernel menu above --\textgreater{}
+Change Kernel). Still have problems? Try relaunching Jupyter Notebook
+from the terminal prompt. Also, consult the forums for more
+troubleshooting tips.}
+
+\textbf{If you get an error that looks like this:}
+
+\begin{verbatim}
+NeedDownloadError: Need ffmpeg exe. 
+You can download it by calling: 
+imageio.plugins.ffmpeg.download()
+\end{verbatim}
+
+\textbf{Follow the instructions in the error message and check out
+\href{https://discussions.udacity.com/t/project-error-of-test-on-videos/274082}{this
+forum post} for more troubleshooting tips across operating systems.}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{c+c1}{\PYZsh{} Import everything needed to edit/save/watch video clips}
+         \PY{k+kn}{from} \PY{n+nn}{moviepy}\PY{n+nn}{.}\PY{n+nn}{editor} \PY{k}{import} \PY{n}{VideoFileClip}
+         \PY{k+kn}{from} \PY{n+nn}{IPython}\PY{n+nn}{.}\PY{n+nn}{display} \PY{k}{import} \PY{n}{HTML}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{k}{def} \PY{n+nf}{process\PYZus{}image}\PY{p}{(}\PY{n}{image}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} NOTE: The output you return should be a color image (3 channel) for processing video below}
+             \PY{c+c1}{\PYZsh{} TODO: put your pipeline here,}
+             \PY{c+c1}{\PYZsh{} you should return the final output (image where lines are drawn on lanes)}
+         
+             
+         \PY{c+c1}{\PYZsh{}     plt.figure()}
+         \PY{c+c1}{\PYZsh{}     plt.imshow(image)}
+         \PY{c+c1}{\PYZsh{}     plt.show}
+         
+             \PY{c+c1}{\PYZsh{}\PYZsh{} Convert to grayscale}
+             \PY{n}{gray\PYZus{}image} \PY{o}{=} \PY{n}{grayscale}\PY{p}{(}\PY{n}{image}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}     plt.figure()}
+         \PY{c+c1}{\PYZsh{}     plt.imshow(gray\PYZus{}image, cmap = \PYZsq{}gray\PYZsq{})}
+         \PY{c+c1}{\PYZsh{}     plt.show}
+         
+         
+             \PY{c+c1}{\PYZsh{}\PYZsh{} Call Canny Edge Detection (return single pixels \PYZdq{}indicating an edge\PYZdq{}, but just a point, not a line)}
+             \PY{n}{low\PYZus{}threshold} \PY{o}{=} \PY{l+m+mi}{100}
+             \PY{n}{high\PYZus{}threshold} \PY{o}{=} \PY{l+m+mi}{200}
+             \PY{n}{cannyed\PYZus{}image} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{Canny}\PY{p}{(}\PY{n}{gray\PYZus{}image}\PY{p}{,} \PY{n}{low\PYZus{}threshold}\PY{p}{,} \PY{n}{high\PYZus{}threshold}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}     plt.figure()}
+         \PY{c+c1}{\PYZsh{}     plt.imshow(cannyed\PYZus{}image, cmap = \PYZsq{}Greys\PYZus{}r\PYZsq{})}
+         \PY{c+c1}{\PYZsh{}     plt.show}
+         
+         
+             \PY{c+c1}{\PYZsh{} Deifne and Crop the Region of Interest}
+             \PY{n}{imshape} \PY{o}{=} \PY{n}{image}\PY{o}{.}\PY{n}{shape}
+             \PY{n}{ROI\PYZus{}vertices} \PY{o}{=} \PY{p}{[}
+                 \PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{imshape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{,}
+                 \PY{p}{(}\PY{l+m+mi}{450}\PY{p}{,} \PY{l+m+mi}{320}\PY{p}{)}\PY{p}{,}
+                 \PY{p}{(}\PY{l+m+mi}{500}\PY{p}{,} \PY{l+m+mi}{320}\PY{p}{)}\PY{p}{,}
+                 \PY{p}{(}\PY{n}{imshape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{imshape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{,}    
+             \PY{p}{]}
+         
+             \PY{n}{cropped\PYZus{}image} \PY{o}{=} \PY{n}{region\PYZus{}of\PYZus{}interest}\PY{p}{(}
+                 \PY{n}{cannyed\PYZus{}image}\PY{p}{,} 
+                 \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n}{ROI\PYZus{}vertices}\PY{p}{]}\PY{p}{,} \PY{n}{dtype} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{int32}\PY{p}{)}\PY{p}{,}
+             \PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}     plt.figure()}
+         \PY{c+c1}{\PYZsh{}     plt.imshow(cropped\PYZus{}image, cmap = \PYZsq{}Greys\PYZus{}r\PYZsq{})}
+         
+         \PY{c+c1}{\PYZsh{}     plt.show}
+         
+         
+             \PY{c+c1}{\PYZsh{}\PYZsh{} Hough Transform : link the pixels representing edges to make a line in common}
+             \PY{n}{rho} \PY{o}{=} \PY{l+m+mi}{6} \PY{c+c1}{\PYZsh{} ditance resolution in pixels of the Hough grid}
+             \PY{n}{theta} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{/}\PY{l+m+mi}{180} \PY{c+c1}{\PYZsh{}angular resolution in radians of the Hough grid   \PYZsh{}theta = np.pi/180}
+             \PY{n}{threshold} \PY{o}{=} \PY{l+m+mi}{50} \PY{c+c1}{\PYZsh{} minimum number of votes (intersections in Hough grid cell) \PYZsh{}threshold = 20}
+             \PY{n}{min\PYZus{}line\PYZus{}len} \PY{o}{=} \PY{l+m+mi}{20} \PY{c+c1}{\PYZsh{} minimum number of pixels making up a line \PYZsh{}min\PYZus{}line\PYZus{}len = 3}
+             \PY{n}{max\PYZus{}line\PYZus{}gap} \PY{o}{=} \PY{l+m+mi}{10} \PY{c+c1}{\PYZsh{} maximum gap in pixels between connectable line segments \PYZsh{}max\PYZus{}line\PYZus{}gap = 10}
+         
+             \PY{n}{lines} \PY{o}{=} \PY{n}{hough\PYZus{}lines}\PY{p}{(}\PY{n}{cropped\PYZus{}image}\PY{p}{,} \PY{n}{rho}\PY{p}{,} \PY{n}{theta}\PY{p}{,} \PY{n}{threshold}\PY{p}{,} \PY{n}{min\PYZus{}line\PYZus{}len}\PY{p}{,} \PY{n}{max\PYZus{}line\PYZus{}gap}\PY{p}{)} \PY{c+c1}{\PYZsh{} returns (x1, x2, y1, y2)}
+         
+         
+             \PY{c+c1}{\PYZsh{}\PYZsh{} Rendering detected Hough LInes as an Overlay : detected lines on the original image}
+             \PY{n}{line\PYZus{}image} \PY{o}{=} \PY{n}{draw\PYZus{}lines}\PY{p}{(}\PY{n}{cannyed\PYZus{}image}\PY{p}{,} \PY{n}{lines}\PY{p}{)} 
+         
+         \PY{c+c1}{\PYZsh{}     plt.figure()}
+         \PY{c+c1}{\PYZsh{}     plt.imshow(line\PYZus{}image)}
+         \PY{c+c1}{\PYZsh{}     plt.show}
+         
+         
+             \PY{c+c1}{\PYZsh{}\PYZsh{} Merge the image with the lines onto the original}
+             \PY{n}{merged\PYZus{}image} \PY{o}{=} \PY{n}{weighted\PYZus{}img}\PY{p}{(}\PY{n}{line\PYZus{}image}\PY{p}{,} \PY{n}{image}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}     plt.figure()}
+         \PY{c+c1}{\PYZsh{}     plt.imshow(merged\PYZus{}image)}
+         \PY{c+c1}{\PYZsh{}     plt.show}
+         
+         
+         
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+             \PY{c+c1}{\PYZsh{} Create a Single Left and Right Lane LIne \PYZsh{}}
+             \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    This can be done by fitting a simple linear model to the various endpoints of the line segments in each group,}
+         \PY{l+s+sd}{    then rendering a single overlay line on that linear model.}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+         
+             \PY{c+c1}{\PYZsh{}\PYZsh{} Distinguish the Left and Right lane : Check the direction of the line\PYZsq{}s slope}
+             \PY{n}{left\PYZus{}line\PYZus{}x} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{n}{left\PYZus{}line\PYZus{}y} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{n}{right\PYZus{}line\PYZus{}x} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{n}{right\PYZus{}line\PYZus{}y} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         
+             \PY{k}{for} \PY{n}{line} \PY{o+ow}{in} \PY{n}{lines}\PY{p}{:}
+                 \PY{k}{for} \PY{n}{x1}\PY{p}{,} \PY{n}{y1}\PY{p}{,} \PY{n}{x2}\PY{p}{,} \PY{n}{y2} \PY{o+ow}{in} \PY{n}{line}\PY{p}{:}
+                     \PY{n}{slope} \PY{o}{=} \PY{p}{(}\PY{n}{y2} \PY{o}{\PYZhy{}} \PY{n}{y1}\PY{p}{)} \PY{o}{/} \PY{p}{(}\PY{n}{x2} \PY{o}{\PYZhy{}} \PY{n}{x1}\PY{p}{)}
+         
+                     \PY{k}{if} \PY{n}{slope} \PY{o}{\PYZlt{}} \PY{l+m+mi}{0}\PY{p}{:}    \PY{c+c1}{\PYZsh{} left group}
+                         \PY{n}{left\PYZus{}line\PYZus{}x}\PY{o}{.}\PY{n}{extend}\PY{p}{(}\PY{p}{[}\PY{n}{x1}\PY{p}{,} \PY{n}{x2}\PY{p}{]}\PY{p}{)}
+                         \PY{n}{left\PYZus{}line\PYZus{}y}\PY{o}{.}\PY{n}{extend}\PY{p}{(}\PY{p}{[}\PY{n}{y1}\PY{p}{,} \PY{n}{y2}\PY{p}{]}\PY{p}{)}
+                     \PY{k}{else}\PY{p}{:}              \PY{c+c1}{\PYZsh{}right group}
+                         \PY{n}{right\PYZus{}line\PYZus{}x}\PY{o}{.}\PY{n}{extend}\PY{p}{(}\PY{p}{[}\PY{n}{x1}\PY{p}{,} \PY{n}{x2}\PY{p}{]}\PY{p}{)}
+                         \PY{n}{right\PYZus{}line\PYZus{}y}\PY{o}{.}\PY{n}{extend}\PY{p}{(}\PY{p}{[}\PY{n}{y1}\PY{p}{,} \PY{n}{y2}\PY{p}{]}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{}\PYZsh{} Create a Single Linear Representation of each Line Group}
+             \PY{c+c1}{\PYZsh{} Two known value: y values for the top and bottom endpoints }
+             \PY{n}{min\PYZus{}y} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{image}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{*} \PY{p}{(}\PY{l+m+mi}{3} \PY{o}{/} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} Just below the horizon}
+             \PY{n}{max\PYZus{}y} \PY{o}{=} \PY{n}{image}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{c+c1}{\PYZsh{} The bottom of the image}
+         
+             \PY{c+c1}{\PYZsh{} Get the parameters for 1D polynomial y = mx + b, which is fit to the points }
+             \PY{n}{poly\PYZus{}left\PYZus{}param} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{polyfit}\PY{p}{(}\PY{n}{left\PYZus{}line\PYZus{}y}\PY{p}{,} \PY{n}{left\PYZus{}line\PYZus{}x}\PY{p}{,} \PY{n}{deg} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)} \PY{c+c1}{\PYZsh{}return (m,b)}
+             \PY{n}{poly\PYZus{}right\PYZus{}param} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{polyfit}\PY{p}{(}\PY{n}{right\PYZus{}line\PYZus{}y}\PY{p}{,} \PY{n}{right\PYZus{}line\PYZus{}x}\PY{p}{,} \PY{n}{deg} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} Get the Left Line}
+             \PY{n}{poly\PYZus{}left\PYZus{}line} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{poly1d}\PY{p}{(}\PY{n}{poly\PYZus{}left\PYZus{}param}\PY{p}{)}
+             \PY{n}{left\PYZus{}x\PYZus{}start} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{poly\PYZus{}left\PYZus{}line}\PY{p}{(}\PY{n}{max\PYZus{}y}\PY{p}{)}\PY{p}{)}
+             \PY{n}{left\PYZus{}x\PYZus{}end} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{poly\PYZus{}left\PYZus{}line}\PY{p}{(}\PY{n}{min\PYZus{}y}\PY{p}{)}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} Get the RIght LIne}
+             \PY{n}{poly\PYZus{}right\PYZus{}line} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{poly1d}\PY{p}{(}\PY{n}{poly\PYZus{}right\PYZus{}param}\PY{p}{)}
+             \PY{n}{right\PYZus{}x\PYZus{}start} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{poly\PYZus{}right\PYZus{}line}\PY{p}{(}\PY{n}{max\PYZus{}y}\PY{p}{)}\PY{p}{)}
+             \PY{n}{right\PYZus{}x\PYZus{}end} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{poly\PYZus{}right\PYZus{}line}\PY{p}{(}\PY{n}{min\PYZus{}y}\PY{p}{)}\PY{p}{)}
+         
+             \PY{n}{line\PYZus{}image\PYZus{}2} \PY{o}{=} \PY{n}{draw\PYZus{}lines}\PY{p}{(}
+                 \PY{n}{image}\PY{p}{,}
+                 \PY{p}{[}\PY{p}{[}
+                     \PY{p}{[}\PY{n}{left\PYZus{}x\PYZus{}start}\PY{p}{,} \PY{n}{max\PYZus{}y}\PY{p}{,} \PY{n}{left\PYZus{}x\PYZus{}end}\PY{p}{,} \PY{n}{min\PYZus{}y}\PY{p}{]}\PY{p}{,}
+                     \PY{p}{[}\PY{n}{right\PYZus{}x\PYZus{}start}\PY{p}{,} \PY{n}{max\PYZus{}y}\PY{p}{,} \PY{n}{right\PYZus{}x\PYZus{}end}\PY{p}{,} \PY{n}{min\PYZus{}y}\PY{p}{]}\PY{p}{,}
+                 \PY{p}{]}\PY{p}{]}\PY{p}{,}
+                 \PY{n}{thickness} \PY{o}{=} \PY{l+m+mi}{5}\PY{p}{,}
+             \PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}     plt.figure()}
+         \PY{c+c1}{\PYZsh{}     plt.imshow(line\PYZus{}image\PYZus{}2)}
+         \PY{c+c1}{\PYZsh{}     plt.show}
+         
+         
+         
+             \PY{n}{merged\PYZus{}image\PYZus{}2} \PY{o}{=} \PY{n}{weighted\PYZus{}img}\PY{p}{(}\PY{n}{line\PYZus{}image\PYZus{}2}\PY{p}{,} \PY{n}{image}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}     plt.figure()}
+         \PY{c+c1}{\PYZsh{}     plt.imshow(merged\PYZus{}image\PYZus{}2)}
+         \PY{c+c1}{\PYZsh{}     plt.show}
+             
+             \PY{n}{result} \PY{o}{=} \PY{n}{merged\PYZus{}image\PYZus{}2}
+             
+             \PY{k}{return} \PY{n}{result}
+\end{Verbatim}
+
+
+    Let's try the one with the solid white lane on the right first \ldots{}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{n}{white\PYZus{}output} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{test\PYZus{}videos\PYZus{}output/solidWhiteRight.mp4}\PY{l+s+s1}{\PYZsq{}}
+         
+         \PY{c+c1}{\PYZsh{}\PYZsh{} To speed up the testing process you may want to try your pipeline on a shorter subclip of the video}
+         \PY{c+c1}{\PYZsh{}\PYZsh{} To do so add .subclip(start\PYZus{}second,end\PYZus{}second) to the end of the line below}
+         \PY{c+c1}{\PYZsh{}\PYZsh{} Where start\PYZus{}second and end\PYZus{}second are integer values representing the start and end of the subclip}
+         \PY{c+c1}{\PYZsh{}\PYZsh{} You may also uncomment the following line for a subclip of the first 5 seconds}
+         \PY{c+c1}{\PYZsh{}\PYZsh{}clip1 = VideoFileClip(\PYZdq{}test\PYZus{}videos/solidWhiteRight.mp4\PYZdq{}).subclip(0,5)}
+         \PY{n}{clip1} \PY{o}{=} \PY{n}{VideoFileClip}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{test\PYZus{}videos/solidWhiteRight.mp4}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{white\PYZus{}clip} \PY{o}{=} \PY{n}{clip1}\PY{o}{.}\PY{n}{fl\PYZus{}image}\PY{p}{(}\PY{n}{process\PYZus{}image}\PY{p}{)} \PY{c+c1}{\PYZsh{}NOTE: this function expects color images!!}
+         \PY{o}{\PYZpc{}}\PY{k}{time} white\PYZus{}clip.write\PYZus{}videofile(white\PYZus{}output, audio=False)
+         
+         
+         \PY{c+c1}{\PYZsh{} yellow\PYZus{}output = \PYZsq{}test\PYZus{}videos\PYZus{}output/solidYellowLeft.mp4\PYZsq{}}
+         
+         \PY{c+c1}{\PYZsh{} \PYZsh{}\PYZsh{} To speed up the testing process you may want to try your pipeline on a shorter subclip of the video}
+         \PY{c+c1}{\PYZsh{} \PYZsh{}\PYZsh{} To do so add .subclip(start\PYZus{}second,end\PYZus{}second) to the end of the line below}
+         \PY{c+c1}{\PYZsh{} \PYZsh{}\PYZsh{} Where start\PYZus{}second and end\PYZus{}second are integer values representing the start and end of the subclip}
+         
+         \PY{c+c1}{\PYZsh{} \PYZsh{}\PYZsh{} You may also uncomment the following line for a subclip of the first 5 seconds}
+         \PY{c+c1}{\PYZsh{} \PYZsh{}\PYZsh{}clip1 = VideoFileClip(\PYZdq{}test\PYZus{}videos/solidWhiteRight.mp4\PYZdq{}).subclip(0,5)}
+         \PY{c+c1}{\PYZsh{} clip1 = VideoFileClip(\PYZdq{}test\PYZus{}videos/solidYellowLeft.mp4\PYZdq{})}
+         \PY{c+c1}{\PYZsh{} yellow\PYZus{}clip = clip1.fl\PYZus{}image(process\PYZus{}image) \PYZsh{}NOTE: this function expects color images!!}
+         \PY{c+c1}{\PYZsh{} \PYZpc{}time yellow\PYZus{}clip.write\PYZus{}videofile(yellow\PYZus{}output, audio=False)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[MoviePy] >>>> Building video test\_videos\_output/solidWhiteRight.mp4
+[MoviePy] Writing video test\_videos\_output/solidWhiteRight.mp4
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+
+  0\%|          | 0/222 [00:00<?, ?it/s]
+
+  2\%|▏         | 4/222 [00:00<00:05, 37.08it/s]
+
+  5\%|▍         | 11/222 [00:00<00:04, 50.68it/s]
+
+  8\%|▊         | 17/222 [00:00<00:03, 52.84it/s]
+
+ 11\%|█▏        | 25/222 [00:00<00:03, 58.32it/s]
+
+ 14\%|█▍        | 32/222 [00:00<00:03, 59.41it/s]
+
+ 17\%|█▋        | 38/222 [00:00<00:03, 59.25it/s]
+
+ 20\%|█▉        | 44/222 [00:00<00:03, 57.90it/s]
+
+ 23\%|██▎       | 50/222 [00:00<00:03, 54.54it/s]
+
+ 25\%|██▍       | 55/222 [00:01<00:03, 53.65it/s]
+
+ 27\%|██▋       | 60/222 [00:01<00:03, 51.35it/s]
+
+ 29\%|██▉       | 65/222 [00:01<00:03, 51.15it/s]
+
+ 32\%|███▏      | 70/222 [00:01<00:02, 50.91it/s]
+
+ 34\%|███▍      | 75/222 [00:01<00:02, 49.71it/s]
+
+ 36\%|███▌      | 80/222 [00:01<00:02, 49.02it/s]
+
+ 38\%|███▊      | 85/222 [00:01<00:02, 47.90it/s]
+
+ 41\%|████      | 90/222 [00:01<00:02, 46.93it/s]
+
+ 42\%|████▏     | 94/222 [00:02<00:02, 46.05it/s]
+
+ 44\%|████▍     | 98/222 [00:02<00:02, 45.25it/s]
+
+ 46\%|████▌     | 102/222 [00:02<00:02, 44.76it/s]
+
+ 48\%|████▊     | 107/222 [00:02<00:02, 44.69it/s]
+
+ 50\%|█████     | 111/222 [00:02<00:02, 44.41it/s]
+
+ 52\%|█████▏    | 115/222 [00:02<00:02, 44.03it/s]
+
+ 54\%|█████▍    | 120/222 [00:02<00:02, 44.01it/s]
+
+ 56\%|█████▋    | 125/222 [00:02<00:02, 43.97it/s]
+
+ 59\%|█████▊    | 130/222 [00:02<00:02, 43.80it/s]
+
+ 61\%|██████    | 135/222 [00:03<00:02, 43.32it/s]
+
+ 63\%|██████▎   | 139/222 [00:03<00:01, 43.11it/s]
+
+ 65\%|██████▍   | 144/222 [00:03<00:01, 43.02it/s]
+
+ 67\%|██████▋   | 149/222 [00:03<00:01, 43.09it/s]
+
+ 69\%|██████▉   | 154/222 [00:03<00:01, 42.73it/s]
+
+ 71\%|███████   | 158/222 [00:03<00:01, 42.65it/s]
+
+ 73\%|███████▎  | 162/222 [00:03<00:01, 42.40it/s]
+
+ 75\%|███████▍  | 166/222 [00:03<00:01, 42.06it/s]
+
+ 77\%|███████▋  | 170/222 [00:04<00:01, 41.90it/s]
+
+ 78\%|███████▊  | 174/222 [00:04<00:01, 41.74it/s]
+
+ 80\%|████████  | 178/222 [00:04<00:01, 41.64it/s]
+
+ 82\%|████████▏ | 183/222 [00:04<00:00, 41.80it/s]
+
+ 84\%|████████▍ | 187/222 [00:04<00:00, 41.74it/s]
+
+ 86\%|████████▌ | 191/222 [00:04<00:00, 41.44it/s]
+
+ 88\%|████████▊ | 195/222 [00:04<00:00, 41.27it/s]
+
+ 90\%|████████▉ | 199/222 [00:04<00:00, 41.19it/s]
+
+ 91\%|█████████▏| 203/222 [00:04<00:00, 40.90it/s]
+
+ 93\%|█████████▎| 207/222 [00:05<00:00, 40.87it/s]
+
+ 95\%|█████████▌| 211/222 [00:05<00:00, 40.81it/s]
+
+ 97\%|█████████▋| 215/222 [00:05<00:00, 40.72it/s]
+
+ 99\%|█████████▉| 220/222 [00:05<00:00, 40.69it/s]
+
+100\%|█████████▉| 221/222 [00:05<00:00, 40.64it/s]
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[MoviePy] Done.
+[MoviePy] >>>> Video ready: test\_videos\_output/solidWhiteRight.mp4 
+
+CPU times: user 28.4 s, sys: 172 ms, total: 28.5 s
+Wall time: 5.77 s
+
+    \end{Verbatim}
+
+    Play the video inline, or if you prefer find the video in your
+filesystem (should be in the same directory) and play it in your video
+player of choice.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{n}{HTML}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+s2}{\PYZlt{}video width=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{960}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ height=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{540}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ controls\PYZgt{}}
+         \PY{l+s+s2}{  \PYZlt{}source src=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}0\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZgt{}}
+         \PY{l+s+s2}{\PYZlt{}/video\PYZgt{}}
+         \PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{white\PYZus{}output}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}28}]:} <IPython.core.display.HTML object>
+\end{Verbatim}
+            
+    \hypertarget{improve-the-draw_lines-function}{%
+\subsection{Improve the draw\_lines()
+function}\label{improve-the-draw_lines-function}}
+
+\textbf{At this point, if you were successful with making the pipeline
+and tuning parameters, you probably have the Hough line segments drawn
+onto the road, but what about identifying the full extent of the lane
+and marking it clearly as in the example video (P1\_example.mp4)? Think
+about defining a line to run the full length of the visible lane based
+on the line segments you identified with the Hough Transform. As
+mentioned previously, try to average and/or extrapolate the line
+segments you've detected to map out the full extent of the lane lines.
+You can see an example of the result you're going for in the video
+``P1\_example.mp4''.}
+
+\textbf{Go back and modify your draw\_lines function accordingly and try
+re-running your pipeline. The new output should draw a single, solid
+line over the left lane line and a single, solid line over the right
+lane line. The lines should start from the bottom of the image and
+extend out to the top of the region of interest.}
+
+    Now for the one with the solid yellow lane on the left. This one's more
+tricky!
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{yellow\PYZus{}output} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{test\PYZus{}videos\PYZus{}output/solidYellowLeft.mp4}\PY{l+s+s1}{\PYZsq{}}
+        \PY{c+c1}{\PYZsh{}\PYZsh{} To speed up the testing process you may want to try your pipeline on a shorter subclip of the video}
+        \PY{c+c1}{\PYZsh{}\PYZsh{} To do so add .subclip(start\PYZus{}second,end\PYZus{}second) to the end of the line below}
+        \PY{c+c1}{\PYZsh{}\PYZsh{} Where start\PYZus{}second and end\PYZus{}second are integer values representing the start and end of the subclip}
+        \PY{c+c1}{\PYZsh{}\PYZsh{} You may also uncomment the following line for a subclip of the first 5 seconds}
+        \PY{c+c1}{\PYZsh{}\PYZsh{}clip2 = VideoFileClip(\PYZsq{}test\PYZus{}videos/solidYellowLeft.mp4\PYZsq{}).subclip(0,5)}
+        \PY{n}{clip2} \PY{o}{=} \PY{n}{VideoFileClip}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{test\PYZus{}videos/solidYellowLeft.mp4}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{yellow\PYZus{}clip} \PY{o}{=} \PY{n}{clip2}\PY{o}{.}\PY{n}{fl\PYZus{}image}\PY{p}{(}\PY{n}{process\PYZus{}image}\PY{p}{)}
+        \PY{o}{\PYZpc{}}\PY{k}{time} yellow\PYZus{}clip.write\PYZus{}videofile(yellow\PYZus{}output, audio=False)
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{HTML}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{l+s+s2}{\PYZlt{}video width=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{960}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ height=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{540}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ controls\PYZgt{}}
+        \PY{l+s+s2}{  \PYZlt{}source src=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}0\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZgt{}}
+        \PY{l+s+s2}{\PYZlt{}/video\PYZgt{}}
+        \PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{yellow\PYZus{}output}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{writeup-and-submission}{%
+\subsection{Writeup and Submission}\label{writeup-and-submission}}
+
+If you're satisfied with your video outputs, it's time to make the
+report writeup in a pdf or markdown file. Once you have this Ipython
+notebook ready along with the writeup, it's time to submit for review!
+Here is a
+\href{https://github.com/udacity/CarND-LaneLines-P1/blob/master/writeup_template.md}{link}
+to the writeup template file.
+
+    \hypertarget{optional-challenge}{%
+\subsection{Optional Challenge}\label{optional-challenge}}
+
+Try your lane finding pipeline on the video below. Does it still work?
+Can you figure out a way to make it more robust? If you're up for the
+challenge, modify your pipeline so it works with this video and submit
+it along with the rest of your project!
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{challenge\PYZus{}output} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{test\PYZus{}videos\PYZus{}output/challenge.mp4}\PY{l+s+s1}{\PYZsq{}}
+        \PY{c+c1}{\PYZsh{}\PYZsh{} To speed up the testing process you may want to try your pipeline on a shorter subclip of the video}
+        \PY{c+c1}{\PYZsh{}\PYZsh{} To do so add .subclip(start\PYZus{}second,end\PYZus{}second) to the end of the line below}
+        \PY{c+c1}{\PYZsh{}\PYZsh{} Where start\PYZus{}second and end\PYZus{}second are integer values representing the start and end of the subclip}
+        \PY{c+c1}{\PYZsh{}\PYZsh{} You may also uncomment the following line for a subclip of the first 5 seconds}
+        \PY{c+c1}{\PYZsh{}\PYZsh{}clip3 = VideoFileClip(\PYZsq{}test\PYZus{}videos/challenge.mp4\PYZsq{}).subclip(0,5)}
+        \PY{n}{clip3} \PY{o}{=} \PY{n}{VideoFileClip}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{test\PYZus{}videos/challenge.mp4}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{challenge\PYZus{}clip} \PY{o}{=} \PY{n}{clip3}\PY{o}{.}\PY{n}{fl\PYZus{}image}\PY{p}{(}\PY{n}{process\PYZus{}image}\PY{p}{)}
+        \PY{o}{\PYZpc{}}\PY{k}{time} challenge\PYZus{}clip.write\PYZus{}videofile(challenge\PYZus{}output, audio=False)
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{HTML}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{l+s+s2}{\PYZlt{}video width=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{960}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ height=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{540}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ controls\PYZgt{}}
+        \PY{l+s+s2}{  \PYZlt{}source src=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}0\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZgt{}}
+        \PY{l+s+s2}{\PYZlt{}/video\PYZgt{}}
+        \PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{challenge\PYZus{}output}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
