@@ -71,13 +71,9 @@ Furthermore, I can reject some lines with a slope absolute value less than 0.5, 
 ![merged_image]
 
 
-
-
-
-To average and extrapolate the lines in each side, I accumulate each point of those sides, and then first degree polynomial y=mx+b was fit to those points using numpy.polyfit function. When the line equation was found, it was evaluated on the region of interest to define the points where the line would be shown on the image.
+With these algorithms above, there was no big difficulty to find out the proper lane. But for videos, at the beginning I just drew a line directly connected from end point to end point of line. But it was too sensitive to the end point, resulting in rapidly changing slopes. 
+To solve the issue, I had to average and extrapolated the lines in each side separately. I accumulated each point of those sides, and then first degree polynomial y=mx+b was fit to those points using numpy.polyfit function. When the line equation was found, it was evaluated on the region of interest to define the points where the line would be shown on the image.
 ![merged_image_2]
-
-
 
 
 
