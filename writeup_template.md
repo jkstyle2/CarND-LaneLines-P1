@@ -82,7 +82,7 @@ To solve the issue, I had to average and extrapolated the lines in each side sep
 
 While I got a satisfactory result on the first two videos provided by Udacity, I identified there are some issues on my current pipeline for the optional challenge video. Although I tried to figure it out hard, but it remains still quite tricky.
 
-Overall, the challenge video has these tricky features:
+Overall, the challenge video has some specific features such that:
 1) The road becomes very lighter at a certain point. It destroys the canny edge detector which finds the line using a grayscaled image.
 2) The car is driving on a pretty much curved road. I may need to modify some parameters of Hough transform function.
 3) There are some shadows due to some trees
