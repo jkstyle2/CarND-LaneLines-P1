@@ -59,13 +59,10 @@ Furthermore, I can reject some lines with a slope absolute value less than 0.5, 
 
 
 To average and extrapolate the lines in each side, I accumulate each point of those sides, and then first degree polynomial y=mx+b was fit to those points using numpy.polyfit function. When the line equation was found, it was evaluated on the region of interest to define the points where the line would be shown on the image.
-![alt text][line_image_2]
 ![alt text][merged_image_2]
 
 
-In order to draw a single line on the left and right lanes, I modified the draw_lines() function by ...
 
-If you'd like to include images to show how the pipeline works, here is how to include an image: 
 
 
 
