@@ -75,7 +75,7 @@ Furthermore, I can reject some lines with a slope absolute value less than 0.5, 
 
 
 To average and extrapolate the lines in each side, I accumulate each point of those sides, and then first degree polynomial y=mx+b was fit to those points using numpy.polyfit function. When the line equation was found, it was evaluated on the region of interest to define the points where the line would be shown on the image.
-![alt text][merged_image_2]
+![merged_image_2]
 
 
 
